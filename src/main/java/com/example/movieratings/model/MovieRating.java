@@ -1,7 +1,8 @@
 package com.example.movieratings.model;
 
+import java.util.Objects;
+
 public class MovieRating {
-    private  int id;
     private String title;
     private int year;
     private double rating;
@@ -43,5 +44,17 @@ public class MovieRating {
             throw new IllegalArgumentException("rating must be between 1.0 and 5.0");
         }
         this.rating = rating;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        MovieRating that = (MovieRating) o;
+        return year == that.year && Objects.equals(title, that.title);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(title, year);
     }
 }

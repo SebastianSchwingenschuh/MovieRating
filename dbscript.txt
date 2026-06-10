@@ -1,0 +1,14 @@
+-- Start the server with: java -cp h2-2.3.232.jar org.h2.tools.Server -ifNotExists
+
+CREATE TABLE movie (
+                       title VARCHAR(50),
+                       release_year INTEGER,
+                       rating FLOAT
+);
+
+INSERT INTO movie (title, release_year, rating) VALUES ('Fight Club', 1999, 4.4);
+INSERT INTO movie (title, release_year, rating) VALUES ('American Psycho', 2000, 3.8);
+INSERT INTO movie (title, release_year, rating) VALUES ('Mad Max: Fury Road', 2015, 4.0);
+INSERT INTO movie (title, release_year, rating) VALUES ('Star Wars', 1977, 4.3);
+
+SELECT * FROM movie

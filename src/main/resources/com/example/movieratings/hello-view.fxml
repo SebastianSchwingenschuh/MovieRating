@@ -1,16 +1,87 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<?import javafx.scene.control.Button?>
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.example.movieratings.controller.MovieRatingController">
+<VBox alignment="CENTER" prefHeight="347.0" prefWidth="330.0" spacing="10.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="htl.leonding.movieratings.controller.MovieRatingsController">
     <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
-
-    <Label fx:id="welcomeText"/>
-    <Button text="Hello!" onAction="#onHelloButtonClick"/>
+    <children>
+        <HBox alignment="CENTER" prefHeight="0.0" prefWidth="200.0">
+            <children>
+                <GridPane alignment="CENTER" prefHeight="17.0" prefWidth="132.0">
+                    <columnConstraints>
+                        <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="116.66668701171875" minWidth="10.0" prefWidth="99.11108907063802" />
+                        <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="61.33331298828125" minWidth="10.0" prefWidth="33.555577596028655" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                    <children>
+                        <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="Movies: " />
+                        <Label fx:id="lblMovieCount" text="num" GridPane.columnIndex="1" />
+                    </children>
+                </GridPane>
+                <GridPane layoutX="10.0" layoutY="10.0" prefHeight="10.0" prefWidth="122.0">
+                    <columnConstraints>
+                        <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="114.33334350585938" minWidth="10.0" prefWidth="114.33334350585938" />
+                        <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="81.4444580078125" minWidth="10.0" prefWidth="55.666656494140625" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                    <children>
+                        <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="90.0" text="Average Rating: " />
+                        <Label fx:id="lblAverageRating" text="num" GridPane.columnIndex="1" />
+                    </children>
+                </GridPane>
+            </children>
+        </HBox>
+        <HBox alignment="CENTER" prefHeight="12.0" prefWidth="200.0" spacing="20.0">
+            <children>
+                <Label text="Year Filter" />
+                <Slider fx:id="sldYearFilter" prefWidth="131.0" />
+            </children>
+        </HBox>
+        <TableView fx:id="tbvMovies" prefHeight="200.0" prefWidth="289.0">
+            <columns>
+                <TableColumn fx:id="tbcTitle" prefWidth="170.0" text="Title" />
+                <TableColumn fx:id="tbcYear" prefWidth="60.0" text="Year" />
+                <TableColumn fx:id="tbcRating" prefWidth="60.0" text="Rating" />
+            </columns>
+        </TableView>
+        <HBox prefHeight="0.0" prefWidth="200.0">
+            <children>
+                <TextField fx:id="txtTitle" prefHeight="25.0" prefWidth="177.0" />
+                <TextField fx:id="txtYear" prefHeight="25.0" prefWidth="75.0" />
+                <TextField fx:id="txtRating" prefHeight="25.0" prefWidth="74.0" />
+            </children>
+        </HBox>
+        <HBox alignment="CENTER" prefHeight="0.0" prefWidth="200.0" spacing="20.0">
+            <children>
+                <Button mnemonicParsing="false" onAction="#handleAddNewRating" text="Add New Rating">
+                    <cursor>
+                        <Cursor fx:constant="CLOSED_HAND" />
+                    </cursor>
+                </Button>
+                <Button mnemonicParsing="false" onAction="#btnHandleRemoveSelected" text="Remove Selected">
+                    <cursor>
+                        <Cursor fx:constant="CLOSED_HAND" />
+                    </cursor>
+                </Button>
+            </children>
+        </HBox>
+    </children>
 </VBox>

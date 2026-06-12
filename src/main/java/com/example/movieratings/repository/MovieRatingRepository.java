@@ -9,12 +9,12 @@ import java.util.List;
 public class MovieRatingRepository {
     private static String DATABASE_URL = "jdbc:h2:tcp://localhost:9092/./default";
 
-    MovieRatingRepository instance;
+    static MovieRatingRepository instance;
 
     public MovieRatingRepository() {
     }
 
-    public MovieRatingRepository getInstance(){
+    public static MovieRatingRepository getInstance(){
         if(instance == null){
             instance = new MovieRatingRepository();
         }

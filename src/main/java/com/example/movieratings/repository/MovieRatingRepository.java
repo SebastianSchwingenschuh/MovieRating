@@ -11,7 +11,7 @@ public class MovieRatingRepository {
 
     static MovieRatingRepository instance;
 
-    public MovieRatingRepository() {
+    private MovieRatingRepository() {
     }
 
     public static MovieRatingRepository getInstance(){
@@ -75,9 +75,10 @@ public class MovieRatingRepository {
 
     public void delete(MovieRating movieRating){
         try ( Connection connection = DriverManager.getConnection(DATABASE_URL)){
-            try (PreparedStatement preparedStatement = connection.prepareStatement("delete from movie where tite = ? and year = ?")) {
+            try (PreparedStatement preparedStatement = connection.prepareStatement("delete from movie where title = ? and year = ?")) {
                 preparedStatement.setString(1, movieRating.getTitle());
                 preparedStatement.setInt(2, movieRating.getYear());
+                preparedStatement.executeUpdate();
             }
         } catch (SQLException e){
             throw new RuntimeException(e);

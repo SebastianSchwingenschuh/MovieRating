@@ -116,8 +116,8 @@ public class MovieRatingService {
         this.reloadMovieRatings();
     }
 
-    public void removeMovieRating(String title, int year, double rating) {
-        MovieRatingRepository.getInstance().delete(new MovieRating(title, year, rating));
+    public void removeMovieRating(MovieRating movieRating) {
+        MovieRatingRepository.getInstance().delete(movieRating);
         this.reloadMovieRatings();
     }
 }

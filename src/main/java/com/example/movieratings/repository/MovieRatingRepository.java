@@ -29,9 +29,9 @@ public class MovieRatingRepository {
                 try (ResultSet resultSet = statement.executeQuery("select * from movie")){
                     while (resultSet.next()){
                         MovieRating movieRating = new MovieRating(
-                                resultSet.getString("title"),
-                                resultSet.getInt("year"),
-                                resultSet.getDouble("rating")
+                                resultSet.getString("TITLE"),
+                                resultSet.getInt("RELEASE_YEAR"),
+                                resultSet.getDouble("RATING")
                         );
                         result.add(movieRating);
                     }
@@ -47,7 +47,7 @@ public class MovieRatingRepository {
 
     public void save(MovieRating movieRating){
         try (Connection connection = DriverManager.getConnection(DATABASE_URL)){
-            try (PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO  movie (title, year, rating) values (?, ?, ?)")) {
+            try (PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO  movie (title, release_year, rating) values (?, ?, ?)")) {
                 preparedStatement.setString(1, movieRating.getTitle());
                 preparedStatement.setInt(2, movieRating.getYear());
                 preparedStatement.setDouble(3, movieRating.getRating());
@@ -75,7 +75,7 @@ public class MovieRatingRepository {
 
     public void delete(MovieRating movieRating){
         try ( Connection connection = DriverManager.getConnection(DATABASE_URL)){
-            try (PreparedStatement preparedStatement = connection.prepareStatement("delete from movie where title = ? and year = ?")) {
+            try (PreparedStatement preparedStatement = connection.prepareStatement("delete from movie where title = ? and release_year = ?")) {
                 preparedStatement.setString(1, movieRating.getTitle());
                 preparedStatement.setInt(2, movieRating.getYear());
                 preparedStatement.executeUpdate();
@@ -86,7 +86,7 @@ public class MovieRatingRepository {
     }
 
 
-    //bei test allerding wahrscheinlich mit id
+    //bei test allerding wahrscheinlich mit id:
     public void delete(Long id) {
         try (Connection connection = DriverManager.getConnection(DATABASE_URL)) {
             try (PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM contact WHERE ID = ?")) {

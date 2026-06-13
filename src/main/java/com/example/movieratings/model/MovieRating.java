@@ -12,6 +12,10 @@ public class MovieRating {
     private SimpleDoubleProperty rating;
 
     public MovieRating(String title, int year, double rating) {
+        this.title = new SimpleStringProperty();
+        this.year = new SimpleIntegerProperty();
+        this.rating = new SimpleDoubleProperty();
+
         this.setTitle(title);
         this.setYear(year);
         this.setRating(rating);

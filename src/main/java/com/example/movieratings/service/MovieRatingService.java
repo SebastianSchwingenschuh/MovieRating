@@ -12,6 +12,9 @@ import javafx.collections.ObservableList;
 import java.util.LinkedList;
 
 public class MovieRatingService {
+    private static final int INIT_MIN_YEAR = 1888;
+    private static final int INIT_MAX_YEAR = 2030;
+
     private static MovieRatingService instance;
 
     public static MovieRatingService getInstance(){
@@ -23,6 +26,8 @@ public class MovieRatingService {
 
     private SimpleIntegerProperty movieCount;
     private SimpleDoubleProperty avgRating;
+    private SimpleIntegerProperty minYear = new SimpleIntegerProperty(INIT_MIN_YEAR);
+    private SimpleIntegerProperty maxYear = new SimpleIntegerProperty(INIT_MAX_YEAR);
     ObservableList<MovieRating> movieRatings;
 
     public int getMovieCount() {
@@ -41,6 +46,22 @@ public class MovieRatingService {
         return avgRating;
     }
 
+    public int getMaxYear() {
+        return maxYear.get();
+    }
+
+    public SimpleIntegerProperty maxYearProperty() {
+        return maxYear;
+    }
+
+    public int getMinYear() {
+        return minYear.get();
+    }
+
+    public SimpleIntegerProperty minYearProperty() {
+        return minYear;
+    }
+
     private MovieRatingService() {
         this.movieRatings = FXCollections.observableList(new LinkedList<>());
 
@@ -56,11 +77,29 @@ public class MovieRatingService {
 
     private void refreshStatistics() {
         this.movieCount.set(this.movieRatings.size());
-        this.avgRating.set(this.movieRatings.stream()
-                .mapToDouble(MovieRating::getRating)
-                .average()
-                .orElse(0.0)
-        );
+        if(!this.movieRatings.isEmpty()) {
+            this.avgRating.set(this.movieRatings.stream()
+                    .mapToDouble(MovieRating::getRating)
+                    .average()
+                    .orElse(0.0)
+            );
+
+            this.minYear.set(this.movieRatings.stream()
+                    .mapToInt(MovieRating::getYear)
+                    .min()
+                    .orElse(INIT_MIN_YEAR)
+            );
+
+            this.maxYear.set(this.movieRatings.stream()
+                    .mapToInt(MovieRating::getYear)
+                    .max()
+                    .orElse(INIT_MAX_YEAR)
+            );
+        } else {
+            this.avgRating.set(0.0);
+            this.minYear.set(INIT_MIN_YEAR);
+            this.maxYear.set(INIT_MAX_YEAR);
+        }
     }
 
     private void reloadMovieRatings() {

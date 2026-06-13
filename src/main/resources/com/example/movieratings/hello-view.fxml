@@ -71,12 +71,12 @@
         </HBox>
         <HBox alignment="CENTER" prefHeight="0.0" prefWidth="200.0" spacing="20.0">
             <children>
-                <Button mnemonicParsing="false" onAction="#handleAddNewRating" text="Add New Rating">
+                <Button fx:id="btnAddNewRating" mnemonicParsing="false" onAction="#handleAddNewRating" text="Add New Rating">
                     <cursor>
                         <Cursor fx:constant="CLOSED_HAND" />
                     </cursor>
                 </Button>
-                <Button mnemonicParsing="false" onAction="#btnHandleRemoveSelected" text="Remove Selected">
+                <Button fx:id="btnRemoveSelected" mnemonicParsing="false" onAction="#btnHandleRemoveSelected" text="Remove Selected">
                     <cursor>
                         <Cursor fx:constant="CLOSED_HAND" />
                     </cursor>

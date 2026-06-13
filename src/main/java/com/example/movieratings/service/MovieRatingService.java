@@ -14,7 +14,7 @@ import java.util.LinkedList;
 public class MovieRatingService {
     private static MovieRatingService instance;
 
-    public MovieRatingService getInstance(){
+    public static MovieRatingService getInstance(){
         if(instance == null){
             instance = new MovieRatingService();
         }
@@ -41,7 +41,7 @@ public class MovieRatingService {
         return avgRating;
     }
 
-    public MovieRatingService() {
+    private MovieRatingService() {
         this.movieRatings = FXCollections.observableList(new LinkedList<>());
 
         this.movieCount = new SimpleIntegerProperty();
@@ -68,6 +68,10 @@ public class MovieRatingService {
         this.movieRatings.addAll(MovieRatingRepository.getInstance().findAll());
     }
 
+    public ObservableList<MovieRating> getMovieRatings() {
+        return FXCollections.unmodifiableObservableList(movieRatings);
+    }
+
     public void createMovieRating(String title, int year, double rating) {
         MovieRatingRepository.getInstance().save(new MovieRating(title, year, rating));
         this.reloadMovieRatings();
@@ -77,5 +81,4 @@ public class MovieRatingService {
         MovieRatingRepository.getInstance().delete(new MovieRating(title, year, rating));
         this.reloadMovieRatings();
     }
-
 }

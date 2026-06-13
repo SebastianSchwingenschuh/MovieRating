@@ -65,7 +65,7 @@ public class MovieRating {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         MovieRating that = (MovieRating) o;
-        return year == that.year && Objects.equals(title, that.title);
+        return year.get() == that.year.get() && Objects.equals(title.get(), that.title.get());
     }
 
     @Override
